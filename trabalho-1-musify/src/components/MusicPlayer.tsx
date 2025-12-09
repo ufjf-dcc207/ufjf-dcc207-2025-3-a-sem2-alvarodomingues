@@ -1,17 +1,29 @@
-// src/components/MusicPlayer.tsx
-import React from 'react';
-import { currentTrack } from '../data';
+import React, { useState } from 'react';
 import { 
     IoPlaySkipBackSharp, 
     IoPlaySkipForwardSharp, 
-    IoPlayCircle, // O botão principal (Play)
+    IoPlayCircle, 
+    IoPauseCircle, // Importamos o ícone de Pause
     IoVolumeMedium, 
     IoShuffle, 
     IoRepeat 
 } from 'react-icons/io5';
+import { CurrentTrack } from '../types';
 
-const MusicPlayer: React.FC = () => {
-    const track = currentTrack; // Dados estáticos
+interface MusicPlayerProps {
+    track: CurrentTrack; // Recebe os dados do App.tsx via props
+}
+
+const MusicPlayer: React.FC<MusicPlayerProps> = ({ track }) => {
+    // ESTADO 2: Controle de Play/Pause (Booleano)
+    const [isPlaying, setIsPlaying] = useState(false);
+    
+    // ESTADO 3: Volume (Número)
+    const [volume, setVolume] = useState(70);
+
+    const togglePlay = () => {
+        setIsPlaying(!isPlaying); // Inverte o valor atual
+    };
 
     return (
         <footer className="music-player">
@@ -27,7 +39,16 @@ const MusicPlayer: React.FC = () => {
                 <div className="controls-buttons">
                     <IoShuffle className="control-icon" size={16} />
                     <IoPlaySkipBackSharp className="control-icon" size={24} />
-                    <IoPlayCircle className="play-button" size={40} /> {/* Botão Play Grande */}
+                    
+                    {/* Botão Dinâmico: Muda o ícone dependendo do estado */}
+                    <div onClick={togglePlay}>
+                        {isPlaying ? (
+                            <IoPauseCircle className="play-button" size={40} />
+                        ) : (
+                            <IoPlayCircle className="play-button" size={40} />
+                        )}
+                    </div>
+
                     <IoPlaySkipForwardSharp className="control-icon" size={24} />
                     <IoRepeat className="control-icon" size={16} />
                 </div>
@@ -35,7 +56,8 @@ const MusicPlayer: React.FC = () => {
                 <div className="progress-bar-container">
                     <span className="time-display">0:30</span>
                     <div className="progress-bar">
-                        <div className="progress-filled" style={{ width: '25%' }}></div>
+                        {/* Exemplo de estilo condicional baseado em estado se quiséssemos animar */}
+                        <div className="progress-filled" style={{ width: isPlaying ? '45%' : '25%' }}></div>
                     </div>
                     <span className="time-display">3:45</span>
                 </div>
@@ -44,7 +66,8 @@ const MusicPlayer: React.FC = () => {
             <div className="volume-controls">
                 <IoVolumeMedium className="volume-icon" size={20} />
                 <div className="volume-slider">
-                     <div className="volume-filled" style={{ width: '70%' }}></div>
+                     {/* A largura da barra de volume agora obedece a variável de estado */}
+                     <div className="volume-filled" style={{ width: `${volume}%` }}></div>
                 </div>
             </div>
         </footer>
