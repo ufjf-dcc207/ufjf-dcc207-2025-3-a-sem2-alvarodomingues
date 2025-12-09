@@ -1,17 +1,21 @@
+import React from 'react';
+import { PlaylistItem } from '../types'; // Certifique-se que o tipo bate ou use any temporariamente se der erro de tipo
 
-interface PlaylistProps {
+// Atualizar interface para incluir o onClick e aceitar o formato correto da playlist
+interface PlaylistCardProps {
   playlist: {
-    id: string;
+    id: number;
     nome: string;
     capaUrl: string;
     descricao: string;
-    
   };
+  onClick: () => void; // Nova prop
 }
-const PlaylistCard: React.FC<PlaylistProps> = ({ playlist }) => { 
+
+const PlaylistCard: React.FC<PlaylistCardProps> = ({ playlist, onClick }) => { 
   return (
-    <div className="playlist-card">
-      
+    // Adicionamos o evento onClick aqui
+    <div className="playlist-card" onClick={onClick}>
       <img src={playlist.capaUrl} alt={`Capa da playlist ${playlist.nome}`} className="playlist-cover" />
       <h3 className="playlist-title">{playlist.nome}</h3>
       <p className="playlist-description">{playlist.descricao}</p>
