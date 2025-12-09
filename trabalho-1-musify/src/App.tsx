@@ -4,7 +4,7 @@ import Sidebar from './components/Sidebar';
 import MusicPlayer from './components/MusicPlayer';
 import HomeView from './views/HomeView';
 import { currentTrack as defaultTrack } from './data';
-import { CurrentTrack } from './types';
+import type { CurrentTrack } from './types';
 
 const App = () => {
   // ESTADO 1: A música que está tocando agora

@@ -1,5 +1,5 @@
 import React from 'react';
-import { PlaylistItem } from '../types'; // Certifique-se que o tipo bate ou use any temporariamente se der erro de tipo
+import type { PlaylistItem } from '../types'; // Certifique-se que o tipo bate ou use any temporariamente se der erro de tipo
 
 // Atualizar interface para incluir o onClick e aceitar o formato correto da playlist
 interface PlaylistCardProps {
