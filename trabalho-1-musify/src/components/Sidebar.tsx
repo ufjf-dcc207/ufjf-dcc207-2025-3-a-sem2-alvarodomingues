@@ -1,12 +1,8 @@
-// src/components/Sidebar.tsx
-import React from 'react';
-import { menuItems, playlists } from '../data';
-import type { PlaylistItem } from '../types';
-// Ícones populares do React Icons (precisam ser instalados)
+import React, { useState } from 'react';
+import { menuItems, playlists as initialPlaylists } from '../data';
 import { IoHome, IoSearch, IoLibrary } from 'react-icons/io5'; 
 import { FaPlus } from 'react-icons/fa';
 
-// Mapeamento simples de ícones para o menu
 const IconMap: Record<string, React.ElementType> = {
     home: IoHome,
     search: IoSearch,
@@ -15,6 +11,24 @@ const IconMap: Record<string, React.ElementType> = {
 };
 
 const Sidebar: React.FC = () => {
+    // ESTADO 4: Lista de Playlists dinâmica
+    // Inicializamos com o que veio do arquivo data.ts
+    const [myPlaylists, setMyPlaylists] = useState(initialPlaylists);
+
+    // Função para criar nova playlist
+    const createPlaylist = () => {
+        const newId = myPlaylists.length + 1;
+        const newPlaylist = {
+            id: newId,
+            nome: `Minha Playlist #${newId}`,
+            descricao: "Playlist criada recentemente",
+            capaUrl: "https://placehold.co/150", // Imagem genérica
+        };
+
+        // Atualiza o estado adicionando o novo item ao array antigo
+        setMyPlaylists([...myPlaylists, newPlaylist]);
+    };
+
     return (
         <aside className="sidebar">
             <div className="sidebar-logo">
@@ -40,13 +54,15 @@ const Sidebar: React.FC = () => {
                 </a>
                 
                 <div className="library-actions">
-                    <button className="create-playlist-btn">
+                    {/* Botão agora chama a função createPlaylist */}
+                    <button className="create-playlist-btn" onClick={createPlaylist}>
                         <FaPlus size={12} />
                     </button>
                 </div>
 
                 <ul className="playlist-list">
-                    {playlists.map((playlist) => (
+                    {/* Renderizamos a variável de ESTADO myPlaylists, não o dado estático */}
+                    {myPlaylists.map((playlist) => (
                         <li key={playlist.id} className="playlist-item">
                             <a href="#">{playlist.nome}</a>
                         </li>
