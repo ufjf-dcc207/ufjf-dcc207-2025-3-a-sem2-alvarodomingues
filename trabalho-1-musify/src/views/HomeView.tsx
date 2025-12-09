@@ -2,22 +2,22 @@ import React from 'react';
 import PlaylistCard from '../components/PlaylistCard';
 import { playlists } from '../data'; 
 
-// Definimos que a HomeView recebe uma função "onPlay" como propriedade
+// Mudamos a interface para receber o ID
 interface HomeViewProps {
-  onPlay: (name: string, image: string) => void;
+  onOpenPlaylist: (id: number) => void;
 }
 
-const HomeView: React.FC<HomeViewProps> = ({ onPlay }) => {
+const HomeView: React.FC<HomeViewProps> = ({ onOpenPlaylist }) => {
   return (
     <main className="home-view">
-      <h2>Sua Biblioteca (Clique para Tocar)</h2>
+      <h2>Sua Biblioteca</h2>
       <div className="playlists-grid">
         {playlists.map((playlist) => (
           <PlaylistCard 
             key={playlist.id} 
             playlist={playlist} 
-            // Passamos a função de clique para o cartão
-            onClick={() => onPlay(playlist.nome, playlist.capaUrl)}
+            // Agora passamos o ID para abrir a lista
+            onClick={() => onOpenPlaylist(playlist.id)}
           />
         ))}
       </div>

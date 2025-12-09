@@ -41,3 +41,19 @@ export const currentTrack: CurrentTrack = {
   album: "The Dark Side of the Moon",
   capaUrl: floyd,
 };
+
+export const playlistTracks: Record<number, CurrentTrack[]> = {
+  1: [ // Rock Clássico
+    { titulo: "Bohemian Rhapsody", artista: "Queen", album: "A Night at the Opera", capaUrl: "https://upload.wikimedia.org/wikipedia/en/4/4d/Queen_A_Night_At_The_Opera.png" },
+    { titulo: "Sweet Child O' Mine", artista: "Guns N' Roses", album: "Appetite for Destruction", capaUrl: "https://upload.wikimedia.org/wikipedia/en/6/60/GunsnRosesAppetiteforDestructionalbum.jpg" },
+    { titulo: "Back in Black", artista: "AC/DC", album: "Back in Black", capaUrl: "https://upload.wikimedia.org/wikipedia/commons/3/3e/ACDC_Back_in_Black_cover.svg" },
+  ],
+  2: [ // Foco Total
+    { titulo: "River Flows in You", artista: "Yiruma", album: "First Love", capaUrl: "https://upload.wikimedia.org/wikipedia/en/5/5e/Yiruma_-_First_Love.jpg" },
+    { titulo: "Cornfield Chase", artista: "Hans Zimmer", album: "Interstellar OST", capaUrl: "https://upload.wikimedia.org/wikipedia/en/b/b3/Interstellar_soundtrack_cover.jpg" },
+  ],
+  3: [ // Hits do Verão
+    { titulo: "Watermelon Sugar", artista: "Harry Styles", album: "Fine Line", capaUrl: "https://upload.wikimedia.org/wikipedia/en/b/b1/Harry_Styles_-_Fine_Line.png" },
+    { titulo: "Levitating", artista: "Dua Lipa", album: "Future Nostalgia", capaUrl: "https://upload.wikimedia.org/wikipedia/en/f/f5/Dua_Lipa_-_Future_Nostalgia_%28Official_Album_Cover%29.png" },
+  ]
+};
