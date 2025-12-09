@@ -2,7 +2,7 @@ import React from 'react';
 import PlaylistCard from '../components/PlaylistCard';
 import { playlists } from '../data'; 
 
-// Mudamos a interface para receber o ID
+//Interface recebe o ID
 interface HomeViewProps {
   onOpenPlaylist: (id: number) => void;
 }
@@ -16,7 +16,6 @@ const HomeView: React.FC<HomeViewProps> = ({ onOpenPlaylist }) => {
           <PlaylistCard 
             key={playlist.id} 
             playlist={playlist} 
-            // Agora passamos o ID para abrir a lista
             onClick={() => onOpenPlaylist(playlist.id)}
           />
         ))}

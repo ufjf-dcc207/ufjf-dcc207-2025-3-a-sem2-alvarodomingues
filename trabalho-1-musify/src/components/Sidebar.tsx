@@ -11,8 +11,7 @@ const IconMap: Record<string, React.ElementType> = {
 };
 
 const Sidebar: React.FC = () => {
-    // ESTADO 4: Lista de Playlists dinâmica
-    // Inicializamos com o que veio do arquivo data.ts
+    
     const [myPlaylists, setMyPlaylists] = useState(initialPlaylists);
 
     // Função para criar nova playlist
@@ -61,7 +60,7 @@ const Sidebar: React.FC = () => {
                 </div>
 
                 <ul className="playlist-list">
-                    {/* Renderizamos a variável de ESTADO myPlaylists, não o dado estático */}
+                    
                     {myPlaylists.map((playlist) => (
                         <li key={playlist.id} className="playlist-item">
                             <a href="#">{playlist.nome}</a>

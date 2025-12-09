@@ -5,7 +5,6 @@ import { IoTimeOutline, IoArrowBack } from 'react-icons/io5';
 
 interface PlaylistDetailProps {
   playlistId: number;
-  // Atualizamos a assinatura da função: agora aceita track E lista
   onPlayTrack: (track: CurrentTrack, fullList: CurrentTrack[]) => void;
   onBack: () => void;
 }
@@ -44,7 +43,6 @@ const PlaylistDetail: React.FC<PlaylistDetailProps> = ({ playlistId, onPlayTrack
             <div 
                 key={index} 
                 className="track-row" 
-                // AQUI ESTÁ O TRUQUE: Envia a música atual E a lista completa (tracks)
                 onClick={() => onPlayTrack(track, tracks)}
             >
                 <span className="track-index">{index + 1}</span>
