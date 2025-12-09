@@ -5,21 +5,19 @@ import { IoTimeOutline, IoArrowBack } from 'react-icons/io5';
 
 interface PlaylistDetailProps {
   playlistId: number;
-  onPlayTrack: (track: CurrentTrack) => void;
+  // Atualizamos a assinatura da função: agora aceita track E lista
+  onPlayTrack: (track: CurrentTrack, fullList: CurrentTrack[]) => void;
   onBack: () => void;
 }
 
 const PlaylistDetail: React.FC<PlaylistDetailProps> = ({ playlistId, onPlayTrack, onBack }) => {
-  // Encontra os dados da playlist (nome, capa, etc)
   const playlistInfo = playlists.find((p) => p.id === playlistId);
-  // Busca as músicas dessa playlist no nosso "banco de dados"
   const tracks = playlistTracks[playlistId] || [];
 
   if (!playlistInfo) return <div>Playlist não encontrada</div>;
 
   return (
     <div className="playlist-detail">
-      {/* Cabeçalho com Botão de Voltar */}
       <div className="detail-header">
         <button onClick={onBack} className="back-button">
             <IoArrowBack size={24} /> Voltar
@@ -34,7 +32,6 @@ const PlaylistDetail: React.FC<PlaylistDetailProps> = ({ playlistId, onPlayTrack
         </div>
       </div>
 
-      {/* Lista de Músicas */}
       <div className="tracks-list">
         <div className="tracks-header-row">
             <span>#</span>
@@ -47,7 +44,8 @@ const PlaylistDetail: React.FC<PlaylistDetailProps> = ({ playlistId, onPlayTrack
             <div 
                 key={index} 
                 className="track-row" 
-                onClick={() => onPlayTrack(track)}
+                // AQUI ESTÁ O TRUQUE: Envia a música atual E a lista completa (tracks)
+                onClick={() => onPlayTrack(track, tracks)}
             >
                 <span className="track-index">{index + 1}</span>
                 <div className="track-primary-info">
